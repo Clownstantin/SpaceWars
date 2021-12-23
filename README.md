@@ -1,2 +1,2 @@
 # SpaceWars
- Initial commit
+ Space game.
