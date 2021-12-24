@@ -549,8 +549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _maxBounds: {x: 4, y: 7.5}
-  _minBounds: {x: -4, y: -7.5}
 --- !u!1 &2109982402
 GameObject:
   m_ObjectHideFlags: 0
