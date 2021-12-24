@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _transform = transform;
+
         SetUpMoveBoundaries();
     }
 
