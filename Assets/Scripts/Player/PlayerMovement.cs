@@ -30,10 +30,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _camera = Camera.main;
 
-        Vector3 bounds = new Vector3(_boundOffset, _boundOffset);
+        Vector3 boundsOffset = new Vector3(_boundOffset, _boundOffset);
 
-        _minXY = _camera.ViewportToWorldPoint(new Vector3(0, 0)) + bounds;
-        _maxXY = _camera.ViewportToWorldPoint(new Vector3(1, 1)) - bounds;
+        _minXY = _camera.ViewportToWorldPoint(new Vector3(0, 0)) + boundsOffset;
+        _maxXY = _camera.ViewportToWorldPoint(new Vector3(1, 1)) - boundsOffset;
     }
 
     private void Move()
