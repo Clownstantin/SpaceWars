@@ -1,51 +1,53 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace SpaceWars
 {
-    [SerializeField] private float _moveSpeed = 10f;
-    [SerializeField] private float _boundOffset = 0.5f;
-
-    private Transform _transform;
-    private Camera _camera;
-    private Vector2 _maxXY;
-    private Vector2 _minXY;
-
-    private readonly string _horizontalAxis = "Horizontal";
-    private readonly string _verticalAxis = "Vertical";
-
-    private void Start()
+    public class PlayerMovement : MonoBehaviour
     {
-        _transform = transform;
+        [SerializeField] private float _moveSpeed = 10f;
+        [SerializeField] private float _boundOffset = 0.5f;
 
-        SetUpMoveBoundaries();
-    }
+        private Transform _transform;
+        private Camera _camera;
+        private Vector2 _maxXY;
+        private Vector2 _minXY;
 
+        private readonly string _horizontalAxis = "Horizontal";
+        private readonly string _verticalAxis = "Vertical";
 
-    private void Update()
-    {
-        Move();
-    }
+        private void Start()
+        {
+            _transform = transform;
 
-    private void SetUpMoveBoundaries()
-    {
-        _camera = Camera.main;
+            SetUpMoveBoundaries();
+        }
 
-        Vector3 boundsOffset = new Vector3(_boundOffset, _boundOffset);
+        private void Update()
+        {
+            Move();
+        }
 
-        _minXY = _camera.ViewportToWorldPoint(new Vector3(0, 0)) + boundsOffset;
-        _maxXY = _camera.ViewportToWorldPoint(new Vector3(1, 1)) - boundsOffset;
-    }
+        private void SetUpMoveBoundaries()
+        {
+            _camera = Camera.main;
 
-    private void Move()
-    {
-        Vector3 move = _transform.position;
+            Vector3 boundsOffset = new Vector3(_boundOffset, _boundOffset);
 
-        move.x += Input.GetAxis(_horizontalAxis) * _moveSpeed * Time.deltaTime;
-        move.y += Input.GetAxis(_verticalAxis) * _moveSpeed * Time.deltaTime;
+            _minXY = _camera.ViewportToWorldPoint(new Vector3(0, 0)) + boundsOffset;
+            _maxXY = _camera.ViewportToWorldPoint(new Vector3(1, 1)) - boundsOffset;
+        }
 
-        move.x = Mathf.Clamp(move.x, _minXY.x, _maxXY.x);
-        move.y = Mathf.Clamp(move.y, _minXY.y, _maxXY.y);
+        private void Move()
+        {
+            Vector3 move = _transform.position;
 
-        _transform.position = move;
+            move.x += Input.GetAxis(_horizontalAxis) * _moveSpeed * Time.deltaTime;
+            move.y += Input.GetAxis(_verticalAxis) * _moveSpeed * Time.deltaTime;
+
+            move.x = Mathf.Clamp(move.x, _minXY.x, _maxXY.x);
+            move.y = Mathf.Clamp(move.y, _minXY.y, _maxXY.y);
+
+            _transform.position = move;
+        }
     }
 }

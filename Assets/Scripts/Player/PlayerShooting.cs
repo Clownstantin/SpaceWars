@@ -1,42 +1,45 @@
 using UnityEngine;
 
-public class PlayerShooting : ObjectPool
+namespace SpaceWars
 {
-    [Header("Shoot Settings")]
-    [SerializeField] private LaserBullet _laserPrefab;
-    [SerializeField] private Transform _shootPoint;
-    [SerializeField] private float _fireDelay = 0.1f;
-
-    private float _timePassedAfterShot = 0;
-
-    private void Start()
+    public class PlayerShooting : ObjectPool
     {
-        Init(_laserPrefab.gameObject);
-    }
+        [Header("Shoot Settings")]
+        [SerializeField] private LaserBullet _laserPrefab;
+        [SerializeField] private Transform _shootPoint;
+        [SerializeField] private float _fireDelay = 0.1f;
 
-    private void Update()
-    {
-        Shoot();
-    }
+        private float _timePassedAfterShot = 0;
 
-    private void Shoot()
-    {
-        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        private void Start()
         {
-            _timePassedAfterShot += Time.deltaTime;
-
-            if (_timePassedAfterShot >= _fireDelay)
-            {
-                if (TryGetObject(out GameObject laserBullet))
-                {
-                    _timePassedAfterShot = 0;
-
-                    laserBullet.SetActive(true);
-                    laserBullet.transform.position = _shootPoint.transform.position;
-                }
-            }
+            Init(_laserPrefab.gameObject);
         }
 
-        DisableObjOutScreen();
+        private void Update()
+        {
+            Shoot();
+        }
+
+        private void Shoot()
+        {
+            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+            {
+                _timePassedAfterShot += Time.deltaTime;
+
+                if (_timePassedAfterShot >= _fireDelay)
+                {
+                    if (TryGetObject(out GameObject laserBullet))
+                    {
+                        _timePassedAfterShot = 0;
+
+                        laserBullet.SetActive(true);
+                        laserBullet.transform.position = _shootPoint.transform.position;
+                    }
+                }
+            }
+
+            DisableObjOutScreen();
+        }
     }
 }
