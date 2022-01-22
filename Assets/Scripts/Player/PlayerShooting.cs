@@ -5,7 +5,7 @@ namespace SpaceWars
     public class PlayerShooting : ObjectPool
     {
         [Header("Shoot Settings")]
-        [SerializeField] private LaserBullet _laserPrefab;
+        [SerializeField] private PlayerBullet _laserPrefab;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _fireDelay = 0.1f;
 
@@ -29,10 +29,10 @@ namespace SpaceWars
 
                 if (_timePassedAfterShot >= _fireDelay)
                 {
+                    _timePassedAfterShot = 0;
+
                     if (TryGetObject(out GameObject laserBullet))
                     {
-                        _timePassedAfterShot = 0;
-
                         laserBullet.SetActive(true);
                         laserBullet.transform.position = _shootPoint.transform.position;
                     }

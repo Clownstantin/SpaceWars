@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace SpaceWars
@@ -6,52 +6,37 @@ namespace SpaceWars
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private WaveConfig[] _waveConfigs;
+        [SerializeField] private bool _isLooping = false;
 
-        private WaveConfig _currentWave;
-        private int _waveIndex = 0;
-        private int _spawnedEnemyCount = 0;
-        private float _spawnDelay = 0;
-
-        private void Start()
+        private IEnumerator Start()
         {
-            _currentWave = _waveConfigs[_waveIndex];
+            do yield return StartCoroutine(SpawnAllWaves());
+            while (_isLooping);
         }
 
-        private void Update()
+        private IEnumerator SpawnAllWaves()
         {
-            SpawnAllEnemiesInWave(_currentWave);
-        }
-
-        private void SpawnAllEnemiesInWave(WaveConfig wave)
-        {
-            if (_spawnedEnemyCount < wave.EnemiesCount)
+            for (int i = 0; i < _waveConfigs.Length; i++)
             {
-                _spawnDelay += Time.deltaTime;
-
-                if (_spawnDelay >= wave.TimeBetweenSpawn)
-                {
-                    _spawnDelay = 0;
-                    var enemy = Instantiate(wave.EnemyPrefab, wave.GetWaypointsArray()[0].position, Quaternion.identity);
-
-                    if (enemy.TryGetComponent(out EnemyPathing enemyPathing))
-                        enemyPathing.SetWaveConfig(wave);
-
-                    _spawnedEnemyCount++;
-                }
+                WaveConfig currentWave = _waveConfigs[i];
+                yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
             }
-            else SwitchWave();
         }
 
-        private void SwitchWave()
+        private IEnumerator SpawnAllEnemiesInWave(WaveConfig wave)
         {
-            _waveIndex++;
+            var spawnDelay = new WaitForSeconds(wave.TimeBetweenSpawn);
 
-            if (_waveIndex < _waveConfigs.Length)
+            for (int i = 0; i < wave.EnemiesCount; i++)
             {
-                _spawnedEnemyCount = 0;
-                _currentWave = _waveConfigs[_waveIndex];
+                var enemy = Instantiate(wave.EnemyPrefab, wave.GetWaypointsArray()[0].position, Quaternion.identity);
+
+                if (enemy.TryGetComponent(out EnemyPathing enemyPathing))
+                    enemyPathing.SetWaveConfig(wave);
+
+                yield return spawnDelay;
             }
-            else _waveIndex = -1;
+
         }
     }
 }
