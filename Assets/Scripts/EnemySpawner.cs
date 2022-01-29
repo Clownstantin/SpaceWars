@@ -36,7 +36,6 @@ namespace SpaceWars
 
                 yield return spawnDelay;
             }
-
         }
     }
 }
