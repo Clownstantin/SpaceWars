@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 458574223166792651}
   - component: {fileID: 458574223166792652}
   - component: {fileID: -3290020742425897390}
+  - component: {fileID: -5829423407962844782}
+  - component: {fileID: -3632906696145940142}
   - component: {fileID: 4396930080953317685}
-  - component: {fileID: 2965159232903369377}
   - component: {fileID: -9015989262830933025}
-  m_Layer: 0
+  - component: {fileID: 3289015170869558204}
+  m_Layer: 7
   m_Name: Enemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,12 +99,51 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!50 &-5829423407962844782
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458574223166792653}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-3632906696145940142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458574223166792653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f5a590f898c004492366704e1fef74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 300
+  _score: 100
+  _deathVFX: {fileID: 3485484167884950864, guid: 66d5630d528db89458e3bc229b79c800, type: 3}
+  _effectDuration: 1
+  _deathSFX: {fileID: 8300000, guid: aa2a298c7324b5e44874afcb54d239db, type: 3}
+  _soundVolume: 0.2
 --- !u!114 &4396930080953317685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,19 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ef95c7108b5624882164034cbea231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2965159232903369377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458574223166792653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944a6f3c4d69e0e43bef9a873b3da5b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 400
 --- !u!114 &-9015989262830933025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +172,21 @@ MonoBehaviour:
   _shootPoint: {fileID: 6058723679303889885}
   _minTimeBetweenShots: 0.2
   _maxTimeBetweenShots: 2
+  _shootSFX: {fileID: 8300000, guid: 5b1a062ddca0ab348a5e469086382eb9, type: 3}
+  _shootVolume: 0.05
+--- !u!114 &3289015170869558204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458574223166792653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee12c78953e26334abaf7bcbd25fa67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1000
 --- !u!1 &8924092803915751027
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6058723679303889885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

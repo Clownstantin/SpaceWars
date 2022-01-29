@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+namespace SpaceWars
 {
-    [SerializeField] private int _damage = 10;
-
-    public int Damage => _damage;
-
-    public void OnHit()
+    public class DamageDealer : MonoBehaviour
     {
-        Destroy(gameObject);
+        [SerializeField] private int _damage = 10;
+
+        public int Damage => _damage;
+
+        public void OnHit() => Destroy(gameObject);
     }
 }

@@ -16,10 +16,7 @@ namespace SpaceWars
             _transform.position = _waypoints[_waypointIndex].position;
         }
 
-        private void Update()
-        {
-            WaypointMovement();
-        }
+        private void Update() => WaypointMovement();
 
         public void SetWaveConfig(WaveConfig wave) => _waveConfig = wave;
 
@@ -31,8 +28,7 @@ namespace SpaceWars
                 float deltaMoveSpeed = _waveConfig.MoveSpeed * Time.deltaTime;
                 _transform.position = Vector2.MoveTowards(_transform.position, targetPos, deltaMoveSpeed);
 
-                if (_transform.position == targetPos)
-                    _waypointIndex++;
+                if (_transform.position == targetPos) _waypointIndex++;
             }
             else Destroy(gameObject);
         }

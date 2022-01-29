@@ -5,7 +5,7 @@ namespace SpaceWars
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed = 10f;
-        [SerializeField] private float _boundOffset = 0.5f;
+        [SerializeField] private float _boundsOffset = 0.5f;
 
         private Transform _transform;
         private Camera _camera;
@@ -31,7 +31,7 @@ namespace SpaceWars
         {
             _camera = Camera.main;
 
-            Vector3 boundsOffset = new Vector3(_boundOffset, _boundOffset);
+            Vector3 boundsOffset = new Vector3(_boundsOffset, _boundsOffset);
 
             _minXY = _camera.ViewportToWorldPoint(new Vector3(0, 0)) + boundsOffset;
             _maxXY = _camera.ViewportToWorldPoint(new Vector3(1, 1)) - boundsOffset;
