@@ -13,20 +13,17 @@ namespace SpaceWars
         [SerializeField] private AudioClip _deathSFX;
         [SerializeField] [Range(0, 1)] private float _soundVolume = 0.5f;
 
-        private LevelLoader _levelLoader;
         private GameSession _gameSession;
 
-        private void Start()
-        {
-            _levelLoader = FindObjectOfType<LevelLoader>();
-            _gameSession = FindObjectOfType<GameSession>();
-        }
+        private void Start() => _gameSession = FindObjectOfType<GameSession>();
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent(out DamageDealer damageDealer))
                 DealDamage(damageDealer);
         }
+
+        public float GetHealth() => _health;
 
         private void DealDamage(DamageDealer dealer)
         {
@@ -35,7 +32,7 @@ namespace SpaceWars
             if (_health <= 0) Die();
         }
 
-        private void Die()
+        protected virtual void Die()
         {
             if (gameObject.layer == 7) _gameSession.AddToScore(_score);
 
@@ -44,8 +41,6 @@ namespace SpaceWars
 
             var deathEffect = Instantiate(_deathVFX, transform.position, transform.rotation);
             Destroy(deathEffect, _effectDuration);
-
-            if (gameObject.layer == 6) _levelLoader.LoadGameOverScene();
         }
     }
 }

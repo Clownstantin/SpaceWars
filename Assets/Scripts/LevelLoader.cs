@@ -22,12 +22,12 @@ namespace SpaceWars
 
         public void LoadGameOverScene() => StartCoroutine(WaitAndLoadFinalScene());
 
+        public void QuitGame() => Application.Quit();
+
         private IEnumerator WaitAndLoadFinalScene()
         {
             yield return new WaitForSeconds(_gameOverDelay);
             SceneManager.LoadScene(2);
         }
-
-        public void QuitGame() => Application.Quit();
     }
 }

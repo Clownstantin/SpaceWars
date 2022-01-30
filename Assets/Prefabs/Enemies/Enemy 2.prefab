@@ -171,7 +171,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 1353059564274383194, guid: 147b3166e1c5f1e469ba30df5c1d735c, type: 3}
   _shootPoint: {fileID: 6058723679303889885}
   _minTimeBetweenShots: 0.2
-  _maxTimeBetweenShots: 2
+  _maxTimeBetweenShots: 1
   _shootSFX: {fileID: 8300000, guid: 5b1a062ddca0ab348a5e469086382eb9, type: 3}
   _shootVolume: 0.05
 --- !u!114 &3289015170869558204

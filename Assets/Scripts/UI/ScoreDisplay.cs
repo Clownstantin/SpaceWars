@@ -15,6 +15,12 @@ namespace SpaceWars
             _gameSession = FindObjectOfType<GameSession>();
         }
 
-        private void Update() => _scoreText.text = _gameSession.GetScore().ToString();
+        private void Update() => UpdateScore();
+
+        private void UpdateScore()
+        {
+            if (_gameSession != null)
+                _scoreText.text = _gameSession.GetScore().ToString();
+        }
     }
 }
