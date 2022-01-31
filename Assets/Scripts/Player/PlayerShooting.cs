@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceWars
 {
-    public class PlayerShooting : MonoBehaviour
+    public class PlayerShooting : ObjectPool
     {
         [Header("Shoot Settings")]
         [SerializeField] private PlayerBullet _laserPrefab;
@@ -13,6 +13,11 @@ namespace SpaceWars
         [SerializeField] [Range(0, 1)] private float _shootVolume = 0.1f;
 
         private float _timePassedAfterShot = 0;
+
+        private void Start()
+        {
+            Init(_laserPrefab.gameObject);
+        }
 
         private void Update()
         {
@@ -29,10 +34,17 @@ namespace SpaceWars
                 {
                     _timePassedAfterShot = 0;
 
-                    AudioSource.PlayClipAtPoint(_shootSFX, Camera.main.transform.position, _shootVolume);
-                    Instantiate(_laserPrefab, _shootPoint.position, Quaternion.identity);
+                    if (TryGetObject(out GameObject bullet))
+                    {
+                        bullet.transform.position = _shootPoint.position;
+                        bullet.SetActive(true);
+
+                        AudioSource.PlayClipAtPoint(_shootSFX, Camera.main.transform.position, _shootVolume);
+                    }
                 }
             }
+
+            DisableObjOutScreen();
         }
     }
 }

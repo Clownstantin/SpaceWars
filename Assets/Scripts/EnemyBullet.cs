@@ -7,7 +7,7 @@ namespace SpaceWars
         private void Update()
         {
             Move(Vector2.down);
-            DestroyBulletOutScreen(this);
+            DestroyBulletOutScreen();
         }
     }
 }

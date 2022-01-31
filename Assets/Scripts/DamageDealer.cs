@@ -8,6 +8,10 @@ namespace SpaceWars
 
         public int Damage => _damage;
 
-        public void OnHit() => Destroy(gameObject);
+        public void OnHit()
+        {
+            if (gameObject.layer == 8) gameObject.SetActive(false);
+            else Destroy(gameObject);
+        }
     }
 }

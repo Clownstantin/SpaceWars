@@ -4,10 +4,6 @@ namespace SpaceWars
 {
     public class PlayerBullet : Bullet
     {
-        private void Update()
-        {
-            Move(Vector2.up);
-            DestroyBulletOutScreen(this);
-        }
+        private void Update() => Move(Vector2.up);
     }
 }
